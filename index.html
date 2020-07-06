@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome To PostMaster</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+        integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+        <style>
+            #responsePre {
+                max-height: 500px;
+            }
+        </style>
+    <link rel="stylesheet" href="prism.css">
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <a class="navbar-brand" href="#">PostMaster</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText"
+            aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarText">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">About</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Contact Us</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container">
+        <h1 class="my-3">Welcome To PostMaster</h1>
+    </div>
+
+    <div class="container">
+
+        <!-- URL Box -->
+        <div class="form-group row">
+            <label for="url" class="col-sm-2 col-form-label">URL</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" id="url" placeholder="Enter your URL here">
+            </div>
+        </div>
+
+        <!-- Request Type Box -->
+        <fieldset class="form-group">
+            <div class="row">
+                <legend class="col-form-label col-sm-2 pt-0">Request Type</legend>
+                <div class="col-sm-10">
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="requestType" id="get" value="GET" checked>
+                        <label class="form-check-label" for="get">
+                            GET
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="requestType" id="post" value="POST">
+                        <label class="form-check-label" for="post">
+                            POST
+                        </label>
+                    </div>
+
+                </div>
+            </div>
+        </fieldset>
+
+        <!-- Content Type Box -->
+        <fieldset class="form-group">
+            <div class="row">
+                <legend class="col-form-label col-sm-2 pt-0">Content Type</legend>
+                <div class="col-sm-10">
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="contentType" id="jsonRadio" value="json"
+                            checked>
+                        <label class="form-check-label" for="json">
+                            JSON
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="contentType" id="paramsRadio" value="params">
+                        <label class="form-check-label" for="post">
+                            Custom Parameters
+                        </label>
+                    </div>
+
+                </div>
+            </div>
+        </fieldset>
+
+        <!-- Parameters Box - This will hide on clicking JSON option-->
+        <div id="parametersBox">
+            <div class="form-row">
+                <label for="url" class="col-sm-2 col-form-label">Parameter 1</label>
+                <div class="col-md-4">
+                    <input type="text" class="form-control" id="parameterKey1" placeholder="Enter Paramter 1 Key">
+                </div>
+                <div class="col-md-4">
+                    <input type="text" class="form-control" id="parameterValue1" placeholder="Enter Paramter 1 Value">
+                </div>
+                <button id="addParam" class="btn btn-primary">+</button>
+            </div>
+            <div id="params"></div>
+        </div>
+
+
+        <!-- JSON Request Box - This will hid on clicking parameters option -->
+        <div class="my-3" id="requestJsonBox">
+            <div class="form-group row">
+                <label for="requestJson" class="col-sm-2 col-form-label">Enter Request JSON</label>
+                <div class="col-sm-10">
+                    <textarea class="form-control" name="" id="requestJsonText" cols="30" rows="3"></textarea>
+                </div>
+            </div>
+        </div>
+
+        <!-- Submit button which will trigger fetch API -->
+        <div class="form-group row my-2">
+            <div class="col-sm-10">
+                <button id="submit" class="btn btn-primary">Submit</button>
+            </div>
+        </div>
+
+        <!-- Response Box -->
+        <div class="my-3" id="responsetJsonBox">
+            <div class="form-group row">
+                <label for="responseJson" class="col-sm-2 col-form-label">Response</label>
+                <div class="col-sm-10">
+                    <!-- <textarea class="form-control" name="" id="responseJsonText" cols="30" rows="3">Your response will appear here</textarea> -->
+
+                    <pre id="responsePre" class="language-javascript">
+                        <code class="language-javascript" id="responsePrism">
+                            Your response will appear here
+                        </code>
+                    </pre>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"
+        integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI"
+        crossorigin="anonymous"></script>
+    <script src="app.js"></script>
+    <script src="prism.js"></script>
+</body>
+
+</html>
